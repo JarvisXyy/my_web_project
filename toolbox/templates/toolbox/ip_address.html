@@ -1,0 +1,25 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'file.css' %}">
+<div class="center-container">
+    <form action="{% url 'ip_address' %}" method="post">
+    {% csrf_token %}
+    <label for="ip">Enter IP Address:</label>
+    <input type="text" id="ip" name="ip">
+    <input type="submit" value="Lookup">
+    </form>
+</div>
+
+<div class="center-container">
+    {% if location %}
+        <p>Physical Location of IP: {{ location }}</p>
+    {% endif %}
+</div>
+<div class="center-container">
+    <p>Your Public IP: {{ public_ip }}</p>
+</div>
+<div class="center-container">
+    <p>Your Private IP: {{ private_ip }}</p>
+</div>
+
+
+
