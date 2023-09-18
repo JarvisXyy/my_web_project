@@ -1,0 +1,38 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'file.css' %}">
+<div class="center-container">
+    <form action="{% url 'ip_tools' %}" method="post">
+    {% csrf_token %}
+    <label for="ip">请输入IP：</label>
+    <input type="text" id="ip" name="ip">
+    <input type="submit" value="查询">
+    </form>
+</div>
+
+<div class="center-container">
+    {% if location %}
+        <p>IP物理地址： {{ location }}</p>
+    {% endif %}
+</div>
+<div class="center-container">
+    <p>公网IP：{{ public_ip }}</p>
+</div>
+<div class="center-container">
+    <p>内网IP： {{ private_ip }}</p>
+</div>
+
+<div class="center-container" >
+    <form action="{% url 'ip_tools' %}" method="post">
+    {% csrf_token %}
+    <label for="domain">请输入域名：</label>
+    <input type="text" id="domain" name="domain">
+    <input type="submit" value="查询">
+    </form>
+</div>
+
+<div class="center-container">
+    {% if ip_address %}
+        <p>{{ domain }}：{{ ip_address }}</p>
+    {% endif %}
+</div>
+
