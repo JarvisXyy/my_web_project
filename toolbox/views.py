@@ -60,7 +60,7 @@ def ip_address(request):
         except ValueError:
             return "无效 IP 地址"
 
-    # Handle IP determination based on POST request
+
     if request.method == 'POST':
         ip = request.POST.get('ip')
         location = get_office_location(ip)
@@ -85,7 +85,6 @@ def get_public_ip():
 def get_local_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
-        # doesn't even have to be reachable
         s.connect(('10.254.254.254', 1))
         IP = s.getsockname()[0]
     except Exception:
