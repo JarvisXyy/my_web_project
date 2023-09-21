@@ -1,41 +1,54 @@
+body {
+    font-family: 'Arial', sans-serif;  /* 使用 Arial 字体，没有 Arial 的话，使用无衬线字体 */
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;  /* 设定一个浅灰色背景，使内容更为显眼 */
+    color: #333;  /* 文本颜色 */
+}
+
 .center-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 10vh; /* 使其占据整个视口的高度 */
+    justify-content: center;
+    margin: 20px;
+    padding: 10px;
+}
 
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
 }
-p {
-    height: 10px;
 
+label {
+    margin-bottom: 10px;
 }
-body {
-    font-size: 18px; /* 或更大，根据需要 */
+
+input[type="text"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
-input, button {
-    font-size: 18px;
+
+.submit-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+input[type="submit"] {
     padding: 10px 15px;
-    border-radius: 5px; /* 圆角 */
+    background-color: #007BFF;  /* 使用蓝色背景 */
     border: none;
-    outline: none;
-    transition: all 0.3s; /* 平滑过渡效果 */
-}
-
-button {
-    background-color: #007BFF; /* 蓝色背景 */
+    border-radius: 4px;
     color: white;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #0056b3; /* 鼠标悬停时的深蓝色 */
-}
-
-input[type="text"], input[type="password"] {
-    border: 1px solid #ccc;
-    margin-bottom: 10px; /* 间距 */
-}
-
-input[type="text"]:focus, input[type="password"]:focus {
-    border-color: #007BFF; /* 获得焦点时的边框颜色 */
+input[type="submit"]:hover {
+    background-color: #0056b3;  /* 当鼠标悬停时变为深蓝色 */
 }

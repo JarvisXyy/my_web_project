@@ -1,8 +1,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'file.css' %}">
 <div class="center-container">
-    <form action="{% url 'ip_tools' %}" method="post">
-    {% csrf_token %}
+    <form action="{% url 'ip_tools' %}" method="get">
     <label for="ip">请输入IP：</label>
     <input type="text" id="ip" name="ip">
     <input type="submit" value="查询">
@@ -22,8 +21,7 @@
 </div>
 
 <div class="center-container" >
-    <form action="{% url 'ip_tools' %}" method="post">
-    {% csrf_token %}
+    <form action="{% url 'ip_tools' %}" method="get">
     <label for="domain">请输入域名：</label>
     <input type="text" id="domain" name="domain">
     <input type="submit" value="查询">

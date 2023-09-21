@@ -2,6 +2,7 @@ from django.shortcuts import render
 import socket
 import requests
 import ipaddress
+import time
 
 #办公职场判定
 OFFICE_LOCATIONS = {
@@ -47,8 +48,10 @@ def get_office_location(ip_str):
                 for ip_range in ip_ranges:
                     if ip_obj in ip_range:
                         return location
-
+            start_time = time.time()
             response = requests.get(f"https://ipinfo.io/{ip_str}/json")
+            end_time = time.time()
+            print(f"Time taken for ipinfo.io request: {end_time - start_time:.2f} seconds")
             return response.json().get('city', '') + ", " + response.json().get('region','') + ", " + response.json().get('country', '')
     except ValueError:
         return "无效 IP 地址"
@@ -56,7 +59,12 @@ def get_office_location(ip_str):
 #获取公网IP
 def get_public_ip():
     try:
-        return requests.get("https://httpbin.org/ip").json()["origin"]
+        start_time = time.time()
+        response = requests.get("https://httpbin.org/ip").json()["origin"]
+        end_time = time.time()
+        print(f"Time taken for httpbin.org request: {end_time - start_time:.2f} seconds")
+        return response
+
     except:
         return "Unknown"
 
@@ -75,13 +83,13 @@ def get_local_ip():
 def ip_tools(request):
     context = get_common_context()
 
-    if request.method == 'POST':
-        if 'ip' in request.POST:
-            ip = request.POST.get('ip')
+    if request.method == 'GET':
+        if 'ip' in request.GET:
+            ip = request.GET.get('ip')
             location = get_office_location(ip)
             context['location'] = location
-        elif 'domain' in request.POST:
-            domain = request.POST.get('domain')
+        elif 'domain' in request.GET:
+            domain = request.GET.get('domain')
             try:
                 ip_address = socket.gethostbyname(domain)
             except socket.gaierror:
