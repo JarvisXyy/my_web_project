@@ -37,7 +37,6 @@ def get_common_context():
 def get_office_location(ip_str):
     try:
         ip_obj = ipaddress.ip_address(ip_str)
-
         if ip_obj.is_private:
             if ip_obj in ipaddress.ip_network("10.16.0.0/12"):
                 return "办公网"
@@ -60,11 +59,10 @@ def get_office_location(ip_str):
 def get_public_ip():
     try:
         start_time = time.time()
-        response = requests.get("https://httpbin.org/ip").json()["origin"]
+        response = requests.get("https://api.ipify.org?format=json").json()["ip"]
         end_time = time.time()
-        print(f"Time taken for httpbin.org request: {end_time - start_time:.2f} seconds")
+        print(f"Time taken for api64.ipify.org request: {end_time - start_time:.2f} seconds")
         return response
-
     except:
         return "Unknown"
 
