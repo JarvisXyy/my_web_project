@@ -2,7 +2,7 @@ from django.shortcuts import render
 import socket
 import requests
 import ipaddress
-import time
+
 
 #办公职场判定
 OFFICE_LOCATIONS = {
@@ -26,14 +26,6 @@ OFFICE_LOCATIONS = {
     "REDpass": [ipaddress.ip_network("175.24.248.42/32"), ipaddress.ip_network("175.24.248.82/32")],
     "PA": [ipaddress.ip_network("175.24.248.214/32"), ipaddress.ip_network("175.24.248.13/32")]
 }
-def get_common_context():
-    public_ip = get_public_ip()
-    private_ip = get_local_ip()
-    return {
-        'public_ip': public_ip,
-        'private_ip': private_ip
-    }
-#判断是否在办公网、在哪个职场，若不在职场则显示IP物理位置
 def get_office_location(ip_str):
     try:
         ip_obj = ipaddress.ip_address(ip_str)
@@ -47,39 +39,13 @@ def get_office_location(ip_str):
                 for ip_range in ip_ranges:
                     if ip_obj in ip_range:
                         return location
-            start_time = time.time()
-            response = requests.get(f"https://ipinfo.io/{ip_str}/json")
-            end_time = time.time()
-            print(f"Time taken for ipinfo.io request: {end_time - start_time:.2f} seconds")
+            response = requests.get(f"http://ipinfo.io/{ip_str}/json")
             return response.json().get('city', '') + ", " + response.json().get('region','') + ", " + response.json().get('country', '')
     except ValueError:
         return "无效 IP 地址"
 
-#获取公网IP
-def get_public_ip():
-    try:
-        start_time = time.time()
-        response = requests.get("https://api.ipify.org?format=json").json()["ip"]
-        end_time = time.time()
-        print(f"Time taken for api64.ipify.org request: {end_time - start_time:.2f} seconds")
-        return response
-    except:
-        return "Unknown"
-
-#获取内网IP
-def get_local_ip():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    try:
-        s.connect(('10.254.254.254', 1))
-        IP = s.getsockname()[0]
-    except Exception:
-        IP = '127.0.0.1'
-    finally:
-        s.close()
-    return IP
-
 def ip_tools(request):
-    context = get_common_context()
+    context = {}
 
     if request.method == 'GET':
         if 'ip' in request.GET:

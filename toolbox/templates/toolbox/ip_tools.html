@@ -1,5 +1,14 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'file.css' %}">
+<script type="text/javascript">
+    fetch('http://api64.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => {
+        let userIp = data.ip;
+        document.getElementById("user_public_ip").innerText = "公网IP：" + userIp;
+    });
+</script>
+
 <div class="center-container">
     <form action="{% url 'ip_tools' %}" method="get">
     <label for="ip">请输入IP：</label>
@@ -13,12 +22,8 @@
         <p>IP物理地址： {{ location }}</p>
     {% endif %}
 </div>
-<div class="center-container">
-    <p>公网IP：{{ public_ip }}</p>
-</div>
-<div class="center-container">
-    <p>内网IP： {{ private_ip }}</p>
-</div>
+
+<p class="center-container" id="user_public_ip">公网IP：正在获取...</p>
 
 <div class="center-container" >
     <form action="{% url 'ip_tools' %}" method="get">
@@ -32,5 +37,6 @@
     {% if ip_address %}
         <p>{{ domain }}：{{ ip_address }}</p>
     {% endif %}
+
 </div>
 
