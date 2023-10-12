@@ -1,0 +1,26 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'file.css' %}">
+
+<div class="center-container">
+    <form action="/tools/port_scan/" method="get">
+        <label for="ip">待扫描主机（IP或域名）:</label>
+        <input type="text" id="ip" name="ip" required>
+        <br><br>
+        <label for="start_port">端口起点:</label>
+        <input type="text" id="start_port" name="start_port" required>
+        <br><br>
+        <label for="end_port">端口终点:</label>
+        <input type="text" id="end_port" name="end_port" required>
+        <br><br>
+        <input type="submit" value="扫描">
+    </form>
+</div>
+
+<div class="center-container">
+{% if open_ports %}
+    <p>当前开放端口： {{ open_ports }}</p>
+{% endif %}
+</div>
+
+
+

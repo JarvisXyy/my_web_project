@@ -1,7 +1,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'file.css' %}">
 <script type="text/javascript">
-    fetch('http://api64.ipify.org?format=json')
+    fetch('https://api64.ipify.org?format=json')
     .then(response => response.json())
     .then(data => {
         let userIp = data.ip;
