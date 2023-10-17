@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-m163cbv_)^#_sosj7hr2sr2b8lgnx)-4qvk%ojb33zw8-k4&wu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['150.158.168.168','127.0.0.1','www.jarvis2sec.xyz']
+ALLOWED_HOSTS = ['150.158.168.168','127.0.0.1','one2zero.cn','www.one2zero.cn']
 
 
 # Application definition
@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'toolbox'
+    'toolbox',
+    'news',
+    'core'
 ]
 
 MIDDLEWARE = [
@@ -82,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'web',
         'USER': 'web',
-        'PASSWORD': '',
+        'PASSWORD': 'xiaoyuyang',
         'HOST': '150.158.168.168',
         'PORT': '3306',
     }

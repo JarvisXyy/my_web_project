@@ -64,7 +64,7 @@ def ip_tools(request):
 
     return render(request, 'toolbox/ip_tools.html', context)
 
-async def check_port(ip, port, timeout=3):
+async def check_port(ip, port, timeout=1):
     conn = asyncio.open_connection(ip, port)
     try:
         _, writer = await asyncio.wait_for(conn, timeout)
@@ -80,13 +80,13 @@ async def scan_ports(ip, start_port, end_port):
 
 def port_scan_view(request):
     context = {}
-    if request.method == "GET":
-        ip = request.GET.get('ip')
-        start_port = int(request.GET.get('start_port',1))
-        end_port = int(request.GET.get('end_port',65535))
+    ip = request.GET.get('ip')
+    start_port = request.GET.get('start_port')
+    end_port = request.GET.get('end_port')
+    # 只有当所有的参数都提供了，才进行端口扫描
+    if ip and start_port and end_port:
+        start_port = int(start_port)
+        end_port = int(end_port)
         open_ports = asyncio.run(scan_ports(ip, start_port, end_port))
-        context['ip'] = ip
-        context['start_port'] = start_port
-        context['end_port'] = end_port
         context['open_ports'] = open_ports
     return render(request, 'toolbox/port_scan.html',context)
