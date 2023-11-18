@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{% static 'file.css' %}">
 
 <div class="center-container">
-    <form action="/tools/port_scan/" method="get">
+    <form action="/toolbox/port_scan/" method="get">
         <label for="ip">待扫描主机（IP或域名）:</label>
         <input type="text" id="ip" name="ip" required>
         <br><br>
@@ -18,6 +18,7 @@
 
 <div class="center-container">
 {% if open_ports %}
+    <p>主机：{{ip}}</p>
     <p>当前开放端口： {{ open_ports }}</p>
 {% endif %}
 </div>

@@ -3,6 +3,7 @@ import socket
 import requests
 import ipaddress
 import asyncio
+import aiohttp
 from django.http import JsonResponse
 
 #办公职场判定
@@ -45,6 +46,7 @@ def get_office_location(ip_str):
     except ValueError:
         return "无效 IP 地址"
 
+#IP检测与域名解析
 def ip_tools(request):
     context = {}
 
@@ -64,6 +66,7 @@ def ip_tools(request):
 
     return render(request, 'toolbox/ip_tools.html', context)
 
+#端口扫描功能
 async def check_port(ip, port, timeout=1):
     conn = asyncio.open_connection(ip, port)
     try:
@@ -89,4 +92,32 @@ def port_scan_view(request):
         end_port = int(end_port)
         open_ports = asyncio.run(scan_ports(ip, start_port, end_port))
         context['open_ports'] = open_ports
+        context['ip'] = ip
     return render(request, 'toolbox/port_scan.html',context)
+
+#目录扫描功能
+async def check_dir(url, dir_name):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(f'{url}/{dir_name}') as resp:
+            if resp.status == 200:#响应200就返回目录名
+                return dir_name
+
+async def scan_dirs(url):
+    with open ('../data/fuzzDicts/directoryDicts/top7000.txt','r') as f:
+        lines = f.readline()
+        # 去除每个目录名的尾部换行符
+        dirs = [line.strip() for line in lines]
+        # 异步执行
+        tasks = [check_dir(url, dir_name) for dir_name in dirs]
+        # 等待所有任务完成并获取结果
+        results = await asyncio.gather(*tasks)
+        # 过滤出存在的目录
+        return [dir_name for dir_name in results if dir_name]
+def dir_scan_view(request):
+    context = {}
+    if request.method == 'GET':
+        url = request.GET.get('url')
+        if url:
+            found_dirs = asyncio.run(scan_dirs(url))
+            context['found_dirs'] = found_dirs
+    return render(request, 'toolbox/dir_scan.html', context)
