@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,28 +8,29 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .card-header {
-            background-color: #f7f7f7;
-            border-bottom: 1px solid #ddd;
+            background-color: #007bff;
+            color: white;
+        }
+        .list-group-item {
+            text-align: center;
+            padding: 0;
         }
         .list-group-item a {
+            display: block; /* 使链接填充整个列表项 */
+            padding: 10px 15px;
             color: #007bff;
-            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s;
         }
         .list-group-item a:hover {
-            color: #0056b3;
-            text-decoration: underline;
-        }
-        footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 0.9em;
-            color: #777;
+            text-decoration: none;
+            background-color: #f8f9fa;
         }
     </style>
 </head>
+
 <body>
     <div class="container mt-5">
-        <h1 class="text-center mb-5">文轩智行</h1>
+        <h1 class="text-center mb-4">文轩智行</h1>
         <div class="row justify-content-center">
             <!-- 新闻资讯 -->
             <div class="col-md-8">
@@ -36,18 +38,23 @@
                     <div class="card-header">新闻资讯</div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"><a href="">特斯拉</a></li>
-                        <!-- ... 其他链接 ... -->
+                        <li class="list-group-item"><a href="">蔚来</a></li>
+                        <li class="list-group-item"><a href="">理想</a></li>
+                        <li class="list-group-item"><a href="">小鹏</a></li>
+                        <li class="list-group-item"><a href="">华为</a></li>
+                        <li class="list-group-item"><a href="">极氪</a></li>
+                        <li class="list-group-item"><a href="">智己</a></li>
+                        <li class="list-group-item"><a href="">宝马</a></li>
+                        <li class="list-group-item"><a href="">奔驰</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    <footer>
-        <p>&copy; 2023 文轩智行. All rights reserved.</p>
-    </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
