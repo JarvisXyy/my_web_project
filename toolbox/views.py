@@ -25,7 +25,7 @@ OFFICE_LOCATIONS = {
     "浦东仓库": [ipaddress.ip_network("61.169.21.168/32"), ipaddress.ip_network("61.169.21.170/31"),
                  ipaddress.ip_network("61.169.21.172/30")],
     "海外翻墙（自有）": [ipaddress.ip_network("209.9.115.64/28")],
-    "REDpass": [ipaddress.ip_network("175.24.248.42/32"), ipaddress.ip_network("175.24.248.82/32")],
+    "REDpass": [ipaddress.ip_network("175.24.248.42/32"), ipaddress.ip_network("175.24.248.82/32"),ipaddress.ip_network("175.24.248.125/32"),ipaddress.ip_network("175.24.248.228/32"),ipaddress.ip_network("124.220.29.168/32"),ipaddress.ip_network("115.159.226.104/32")],
     "PA": [ipaddress.ip_network("175.24.248.214/32"), ipaddress.ip_network("175.24.248.13/32")]
 }
 def get_office_location(ip_str):
